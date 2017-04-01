@@ -1,0 +1,22 @@
+GIT
+  remote: git@github.com:afeiship/project_path.git
+  revision: 809467915407c03e7450f5c605735e525db152f9
+  branch: master
+  specs:
+    project_path (0.1.0)
+
+GEM
+  specs:
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  net-sftp
+  project_path!
+
+BUNDLED WITH
+   1.13.7
