@@ -2,24 +2,30 @@
 require 'net/sftp'
 require 'yaml'
 require 'project_path'
+require 'pathname'
 
 ROOT_PATH = ProjectPath.discover_root;
 
-
 class RubyProjectBuild
-  def self.tt
-    puts ProjectPath.discover_root
+  def self.loadYAML inPath
+    path = File.join ROOT_PATH,inPath
+    YAML.load(File.read(path))
   end
 
-  def m1
-    puts 'm1 exec!'
+  def self.onConnect inConfig
+    Net::SFTP.start(inConfig['host'], inConfig['username'], password: inConfig['password'],) do |sftp|
+        yield sftp
+    end
   end
 end
 
-puts RubyProjectBuild.tt
+# CONFIG = RubyProjectBuild.loadYAML 'config/server.yaml'
 
+# RubyProjectBuild.onConnect CONFIG['account'] do | sftp |
+#    p sftp.inspect
+# end
 
-
+# p RubyProjectBuild.new
 ## prepare:
 # gem install net-sftp
 ## load config:
