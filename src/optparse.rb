@@ -5,6 +5,7 @@ require 'optparse'
 options = {}
 OptionParser.new do |opts|
   # 这里是这个命令行工具的帮助信息
+
   opts.banner = 'here is help messages of the command line tool.'
 
   # Option 作为switch，不带argument，用于将 switch 设置成 true 或 false
@@ -23,7 +24,7 @@ OptionParser.new do |opts|
 
   # Option 作为 flag，带argument，用于将argument作为数值解析，比如"name"信息
   #下面的“value”就是用户使用时输入的argument
-  opts.on('-v GIT VERSION', '--version 1.0.1', 'The git dev version') do |value|
+  opts.on('-v GIT VERSION', '--version (eg:1.0.1)', 'The git dev version') do |value|
     options[:version] = value
   end
 
