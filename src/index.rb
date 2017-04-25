@@ -19,6 +19,8 @@ class RubyProjectBuild
   end
 end
 
+# p ARGV.options;
+
 # CONFIG = RubyProjectBuild.loadYAML 'config/server.yaml'
 
 # RubyProjectBuild.onConnect CONFIG['account'] do | sftp |
