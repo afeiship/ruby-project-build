@@ -4,28 +4,18 @@ require 'yaml'
 require 'project_path'
 require 'pathname'
 
+require File.join(File.dirname(__FILE__),'config')
+require File.join(File.dirname(__FILE__),'sftp')
+
 ROOT_PATH = ProjectPath.discover_root;
 
-class RubyProjectBuild
-  def self.loadYAML inPath
-    path = File.join ROOT_PATH,inPath
-    YAML.load(File.read(path))
-  end
-
-  def self.onConnect inConfig
-    Net::SFTP.start(inConfig['host'], inConfig['username'], password: inConfig['password'],) do |sftp|
-        yield sftp
-    end
-  end
-end
 
 # p ARGV.options;
+CONFIG = RubyProjectBuild::Config.loadYAML "#{ROOT_PATH}/config/server.yaml"
 
-# CONFIG = RubyProjectBuild.loadYAML 'config/server.yaml'
-
-# RubyProjectBuild.onConnect CONFIG['account'] do | sftp |
-#    p sftp.inspect
-# end
+RubyProjectBuild::Sftp.start CONFIG['account'] do | sftp |
+  p sftp.remove!('/var/www/html/demo/mortgage-mobx')
+end
 
 # p RubyProjectBuild.new
 ## prepare:

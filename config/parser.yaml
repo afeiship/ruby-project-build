@@ -1,0 +1,5 @@
+commands:
+  - v
+  - version
+  - String
+  - Git dev branch version
